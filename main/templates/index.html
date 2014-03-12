@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Collections</h2>
+    {% for c in collections %}
+        {% if c.records.all.count > 0 %}
+            <a href="/collections/{{c.id}}/page1/">{{c.name}}</a>
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

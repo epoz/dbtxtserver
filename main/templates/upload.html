@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div>
+    <div ng-view class="view-frame">        
+        <form action="{% url 'upload' %}" method="POST" enctype='multipart/form-data'>
+            {% csrf_token %}
+            <h1>Upload a new dbtxt file</h1>
+            Collection:<select name="collection">
+            {% for c in collections %}<option value="{{c.id}}">{{c.name}}</option>{% endfor %}
+            </select>
+            Choose a file: <input type="file" name="dbtxtfile"><br>
+            Field to use as ID: <input type="text" size="20" name="IDfield"><br>
+            Extra Records to add:<br><textarea rows='10'></textarea><br>
+            <br><br><br>
+            <input type="submit" value="OK">
+        </form>
+        {% if size %}
+            Your last upload was {{size}}
+        {% endif %}
+    </div>
+  </div>
+{% endblock content %}

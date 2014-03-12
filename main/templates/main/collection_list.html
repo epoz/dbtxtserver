@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Collections</h1>
+<ul>
+{% for collection in collection_list %}
+    <li><a href="/collections/{{collection.id}}/page1/">{{collection.name}}</a></li>
+{% empty %}
+    <li>No records yet.</li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

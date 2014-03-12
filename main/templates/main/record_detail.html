@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block extra_toolbar %}{% if not user.is_anonymous %}<a href="edit" class="btn">Edit</a>{% endif %}
+{% endblock extra_toolbar %}
+
+
+{% block content %}
+<table>
+{% for k,v in object.obj.items %}
+<tr>
+    <td>{{k}}</td>
+    <td>{% for vv in v %}{{vv}}<br>{% endfor %} </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock content %}

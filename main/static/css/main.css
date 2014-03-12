@@ -1,0 +1,4 @@
+body {margin: 0; padding: 0;}
+#toolbar {height: 25px; background-color: black; padding: 15px;}
+.btn { color: #ccc; text-decoration: none; font-size: 120%; background-color: #555; padding: 3px;}
+.pull-right {float:right;}

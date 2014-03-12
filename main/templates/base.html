@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>dbtxt Server</title>
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" />
+  {% block extra_head %}{% endblock extra_head %}
+</head>
+<body>
+
+  {% block toolbar %}
+  <div id="toolbar">
+    <a class="btn" href="/">Home</a>
+    {% if not user.is_anonymous %}      
+    <a class="btn" href="/admin/">Admin</a>
+    <a class="btn" href="{% url 'upload' %}">Uploads</a>
+    {% endif %}
+    {% block extra_toolbar %}{% endblock extra_toolbar %}
+    {% block login_toolbar %}{% if user.is_anonymous %}<a class="btn pull-right" href="/login">Login</a>{% else %}<a class="btn pull-right" href="/logout">Logout :: {{user.get_full_name}}</a>{% endif %}
+    {% endblock login_toolbar %}
+    
+  </div>
+  {% endblock toolbar %}
+
+
+    <div style="padding: 2px 20px">{% block content %}
+    {% endblock content %}</div>
+
+</body>
+</html>

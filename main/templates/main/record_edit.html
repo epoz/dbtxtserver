@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block extra_head %}
+<style type="text/css" media="screen">
+    #editor { 
+        position: fixed;
+        top: 50px;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+</style>
+{% endblock extra_head %}
+
+{% block extra_toolbar %}<a style="margin-left: 20px" href="." class="btn">Cancel</a>
+{% endblock extra_toolbar %}
+
+
+{% block content %}
+<h1>Edit</h1>
+<div id="editor">{{record.data}}</div>
+<script src="{{STATIC_URL}}ace/ace.js" type="text/javascript" charset="utf-8"></script>
+
+<script>
+    var editor = ace.edit("editor");
+    editor.session.setMode("ace/mode/text");
+</script>
+{% endblock content %}
