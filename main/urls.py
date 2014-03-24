@@ -9,5 +9,6 @@ urlpatterns = patterns('',
     url(r'^collections/$', CollectionListView.as_view(), name='collection-list'),
     url(r'^collections/(?P<collection>[0-9+])/page(?P<page>[0-9]+)/$', RecordListView.as_view(), name='record-list'),
     url(r'^records/(?P<pk>[0-9a-f]+)/$', RecordDetailView.as_view(), name='record-detail'),
-    url(r'^records/(?P<pk>[0-9a-f]+)/edit$', 'main.views.record_edit', name='record-edit'),    
+    url(r'^records/(?P<pk>[0-9a-f]+)/edit$', 'main.views.record_edit', name='record-edit'),
+    url(r'^records/(?P<pk>[0-9a-f]+)/save$', 'main.views.record_save', name='record-save'),
 )

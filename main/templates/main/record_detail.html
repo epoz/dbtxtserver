@@ -5,7 +5,10 @@
 
 
 {% block content %}
-<table>
+{% if object.newer %}
+    <h2><a title="Newer timestamp is: {{object.newer.timestamp}}" href="{% url "record-detail" object.newer.pk %}">There is a newer version for this record</a></h2>
+{% endif %}
+<table id="maintable">
 {% for k,v in object.obj.items %}
 <tr>
     <td>{{k}}</td>
@@ -13,4 +16,10 @@
 </tr>
 {% endfor %}
 </table>
+
+<script type="text/javascript">
+$('#maintable').click(function(e) {
+    document.location = 'edit';
+});
+</script>
 {% endblock content %}

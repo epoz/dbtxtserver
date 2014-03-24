@@ -11,7 +11,7 @@ class Collection(models.Model):
 
 class Record(models.Model):
     uid = models.CharField(max_length=32, primary_key=True)
-    prev = models.ForeignKey('self', null=True, blank=True)
+    newer = models.ForeignKey('self', null=True, blank=True, related_name='older')
     user = models.ForeignKey(User)
     collection = models.ForeignKey(Collection, related_name='records')
     timestamp = models.DateTimeField(auto_now_add=True)    
