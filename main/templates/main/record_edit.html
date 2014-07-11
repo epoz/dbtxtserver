@@ -18,7 +18,7 @@
 
 
 {% block content %}
-<h1>Editing <span style="font-size: 70%; float: right">last edit was: {{record.timestamp}}</span></h1>
+<h1>Editing <span style="font-size: 70%; float: right">last timestamp: {{record.timestamp}}</span></h1>
 <div id="editor">{{record.data}}</div>
 <script src="{{STATIC_URL}}ace/ace.js" type="text/javascript" charset="utf-8"></script>
 

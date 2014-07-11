@@ -1,18 +1,28 @@
+{% if paginator.num_pages > 1 %}
+    
 <div class="pagination">
     <span class="step-links">
         {{paginator.count}} found. 
         
-        {% if page_obj.has_previous %}
-            <a href="/collections/1/?page={{ page_obj.previous_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">previous</a>
+        {% if page_obj.number > 1 %}
+        <a title="go to the first page" href="/collections/1/?page=1{% if q %}&q={{q|urlencode}}{% endif %}">1</a>
         {% endif %}
 
-        <span class="current">
-        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
-        </span>
+        {% if page_obj.has_previous %}
+            <a href="/collections/1/?page={{ page_obj.previous_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">&lt;&lt;</a>
+        {% endif %}
+
+        {{ page_obj.number }}
 
         {% if page_obj.has_next %}
-            <a href="/collections/1/?page={{ page_obj.next_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">next</a>
+            <a href="/collections/1/?page={{ page_obj.next_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">&gt;&gt;</a>
         {% endif %}
+
+        {% if page_obj.number < paginator.num_pages %}
+        <a title="go to the last page" href="/collections/1/?page={{ paginator.num_pages }}{% if q %}&q={{q|urlencode}}{% endif %}">{{ paginator.num_pages }}</a>
+        {% endif %}
+
     </span>
 </div>
 
+{% endif %}

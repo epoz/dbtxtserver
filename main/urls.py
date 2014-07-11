@@ -3,6 +3,7 @@ from views import CollectionListView, RecordListView, RecordDetailView
 
 urlpatterns = patterns('',
     url(r'^$', 'main.views.home', name='home'),
+    url(r'^help/(?P<page>[0-9a-zA-Z]*)$', 'main.views.help', name='help'),
     url(r'^login$', 'django.contrib.auth.views.login', name='login'),
     url(r'^logout$', 'main.views.logout_view', name='logout'),
     url(r'^upload/$', 'main.views.upload', name='upload'),

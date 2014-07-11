@@ -1,6 +1,9 @@
 body {margin: 0; padding: 0; font-family: 'Roboto', sans-serif;}
+h1,h2,h3,h4,h5 {margin: 0;}
 #toolbar {height: 25px; background-color: black; padding: 15px;}
 .nav { color: #ccc; text-decoration: underline; font-size: 120%;  padding: 3px 5px;}
 .btn { color: #ccc; text-decoration: none; font-size: 120%; background-color: #555; padding: 3px 5px;}
 .btn-primary { color: #525; background-color: #ccc;}
 .pull-right {float:right;}
+
+.rightfloaterbox {float:right; border: 2px solid #ccc; padding: 5px}

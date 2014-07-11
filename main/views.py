@@ -11,6 +11,11 @@ import textbase
 import models
 import uuid
 
+def help(request, page):
+    if not page:
+        page = "index"
+    return render(request, 'help/%s.html' % page)
+
 def home(request):
     context = {'collections':models.Collection.objects.all()}
     return render(request, 'index.html', context)
@@ -53,7 +58,7 @@ def search(request):
     return render(request, 'index.html', {'q':q})
 
 class RecordListView(ListView):
-    paginate_by = 20
+    paginate_by = 50
     model = models.Record
 
     def get_context_data(self, **kwargs):

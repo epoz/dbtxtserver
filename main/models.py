@@ -50,6 +50,16 @@ class Record(models.Model):
             return tmp[0]
         return {}
 
+    def ancestors(self):
+        buffer = []
+        cof = self.older.first()
+        count = 0        
+        while cof and count < 1000:
+            buffer.append(cof)
+            cof = cof.older.first()            
+            count += 1
+        return buffer
+
 class Template(models.Model):
     name = models.CharField(max_length=32, primary_key=True)
     content = models.TextField()
