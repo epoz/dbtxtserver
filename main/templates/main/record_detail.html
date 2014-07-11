@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 
-{% block extra_toolbar %}{% if not user.is_anonymous %}<a href="edit" class="btn">Edit</a>{% endif %}
+{% block extra_toolbar %}{% if not user.is_anonymous %}<a style="margin-left: 20px" href="edit" class="btn btn-primary">Edit</a>{% endif %}
 {% endblock extra_toolbar %}
 
 
 {% block content %}
 {% if object.newer %}
-    <h2><a title="Newer timestamp is: {{object.newer.timestamp}}" href="{% url "record-detail" object.newer.pk %}">There is a newer version for this record</a></h2>
+    <div style="float:right"><a title="Newer timestamp is: {{object.newer.timestamp}}" href="{% url "record-detail" object.newer.pk %}">There is a newer version for this record: {{object.newer.timestamp}}</a></div>
+{% endif %}
+{% if object.older.count > 1 %}
+    <a href="#" id="show_older_versions">Show older versions</a>
+    <div id="older_versions" style="display:none">
+{% else %}
+    <div id="older_versions" style="float:right">
+    {% for older in object.older.all %}
+        <a href="{% url 'record-detail' older.pk %}">{{older.timestamp}}</a>
+        {% if not forloop.last %} &middot;&middot; {% endif %}
+    {% endfor %}
+    </div>
 {% endif %}
 <table id="maintable">
 {% for k,v in object.obj.items %}
@@ -20,6 +31,10 @@
 <script type="text/javascript">
 $('#maintable').click(function(e) {
     document.location = 'edit';
+});
+$('#show_older_versions').click(function(e) {
+    $('#older_versions').show();
+    $('#show_older_versions').hide();
 });
 </script>
 {% endblock content %}

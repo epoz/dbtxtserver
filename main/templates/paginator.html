@@ -1,15 +1,18 @@
 <div class="pagination">
     <span class="step-links">
+        {{paginator.count}} found. 
+        
         {% if page_obj.has_previous %}
-            <a href="/collections/1/page{{ page_obj.previous_page_number }}/">previous</a>
+            <a href="/collections/1/?page={{ page_obj.previous_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">previous</a>
         {% endif %}
 
         <span class="current">
-            Page {{ page_obj.number }} of {{ paginator.num_pages }}.
+        Page {{ page_obj.number }} of {{ paginator.num_pages }}.
         </span>
 
         {% if page_obj.has_next %}
-            <a href="/collections/1/page{{ page_obj.next_page_number }}/">next</a>
+            <a href="/collections/1/?page={{ page_obj.next_page_number }}{% if q %}&q={{q|urlencode}}{% endif %}">next</a>
         {% endif %}
     </span>
 </div>
+

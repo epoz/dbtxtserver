@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>dbtxt Server</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="{{ STATIC_URL }}css/main.css" />
   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
   {% block extra_head %}{% endblock extra_head %}
@@ -11,11 +12,13 @@
 
   {% block toolbar %}
   <div id="toolbar">
-    <a class="btn" href="/">Home</a>
+    <a class="nav" href="/">Home</a>
     {% if not user.is_anonymous %}      
-    <a class="btn" href="/admin/">Admin</a>
-    <a class="btn" href="{% url 'upload' %}">Uploads</a>
+    <a class="nav" href="/admin/">Admin</a>
+    <a class="nav" href="{% url 'upload' %}">Uploads</a>
     {% endif %}
+    <input type="text" placeholder="Search" id="q" style="width: 300px; margin-left: 50px" value="{% if q %}{{q}}{% endif %}">
+    <a class="nav" id="search" href="#" title="Do the search">Go</a>
     {% block extra_toolbar %}{% endblock extra_toolbar %}
     {% block login_toolbar %}{% if user.is_anonymous %}<a class="btn pull-right" href="/login">Login</a>{% else %}<a class="btn pull-right" href="/logout">Logout :: {{user.get_full_name}}</a>{% endif %}
     {% endblock login_toolbar %}
@@ -23,9 +26,15 @@
   </div>
   {% endblock toolbar %}
 
-
     <div style="padding: 2px 20px">{% block content %}
     {% endblock content %}</div>
+
+<script type="text/javascript">
+$('#search').click(function(event) {
+  event.preventDefault();
+  document.location = '/collections/{{collection.pk}}/?q=' + $('#q').val();
+});
+</script>
 
 </body>
 </html>
