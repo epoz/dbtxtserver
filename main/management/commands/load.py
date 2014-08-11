@@ -33,5 +33,5 @@ class Command(BaseCommand):
                 continue
             
             dbtxtfile = textbase.TextBase(f)
-            models.Record..objects.bulk_create(models.Record(collection=collection, uid=uuid.uuid4().hex,
-                              user=user, data=textbase.dumpdict(d)) for d in dbtxtfile)
+            models.Record.objects.bulk_create([models.Record(collection=collection, uid=uuid.uuid4().hex,
+                              user=user, data=textbase.dumpdict(d)) for d in dbtxtfile])
