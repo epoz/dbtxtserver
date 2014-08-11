@@ -24,7 +24,7 @@ class Command(BaseCommand):
         )
     
     def handle(self, *args, **options):
-        collection = models.Collection.objects.get(options['collection'])
+        collection = models.Collection.objects.get(pk=options['collection'])
         user = User.objects.get(pk=options['user'])
 
         for f in args:
@@ -33,8 +33,5 @@ class Command(BaseCommand):
                 continue
             
             dbtxtfile = textbase.TextBase(f)
-            for d in dbtxtfile:
-                models.Record.objects.create(collection=collection, uid=uuid.uuid4().hex,
-                                             user=user, data=textbase.dumpdict(d))
-        
-        collection.index()
+            models.Record..objects.bulk_create(models.Record(collection=collection, uid=uuid.uuid4().hex,
+                              user=user, data=textbase.dumpdict(d)) for d in dbtxtfile)
