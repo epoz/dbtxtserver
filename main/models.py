@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.template.defaultfilters import slugify
+from collections import OrderedDict
 import textbase
 import elasticsearch, elasticsearch.helpers
 
@@ -9,6 +10,12 @@ class Collection(models.Model):
     name = models.CharField(max_length=250)
     # Field to use for ID
     # FIeld to use for display template selection
+    fieldorder = models.TextField(blank=True)
+
+    def fields(self):
+        if self.fieldorder:
+            return [x.strip() for x in self.fieldorder.split('\n')]
+        return []
     
     def __unicode__(self):
         return self.name
@@ -45,10 +52,21 @@ class Record(models.Model):
     data = models.TextField()
 
     def obj(self):
+        # Parse the stored textbase from the DB
         tmp = textbase.TextBase(self.data.encode('utf8'))
-        if len(tmp) > 0:
-            return tmp[0]
-        return {}
+        if len(tmp) < 1:
+            return {}
+        tmp = tmp[0]
+
+        # Maintain the field order if set for this collection
+        # as users might have a preference
+        obj = OrderedDict()
+        for field in self.collection.fields():
+            if field in tmp:
+                obj[field] = tmp.pop(field)
+        for k,v in tmp.items():
+            obj[k] = v
+        return obj
 
     def ancestors(self):
         buffer = []

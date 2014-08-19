@@ -3,6 +3,9 @@
 {% block extra_toolbar %}{% if not user.is_anonymous %}<a style="margin-left: 20px" href="edit" class="btn btn-primary">Edit</a>{% endif %}
 {% endblock extra_toolbar %}
 
+{% block extra_head %}
+<script src="{{ STATIC_URL }}openseadragon/openseadragon.min.js"></script>    
+{% endblock extra_head %}
 
 {% block content %}
     
@@ -22,22 +25,18 @@
     </div>
     {% endif %}
 
+{% include "custom/record_detail.html" %}
+
 <table id="maintable">
 {% for k,v in object.obj.items %}
-<tr>
-    <td>{{k}}</td>
+<tr class="fieldrow">
+    <td class="fieldheading">{{k}}</td>
     <td>{% for vv in v %}{{vv}}<br>{% endfor %} </td>
 </tr>
 {% endfor %}
 </table>
 
 <script type="text/javascript">
-{% if not user.is_anonymous %}      
-$('#maintable').click(function(e) {
-    document.location = 'edit';
-});
-{% endif %}
-
 $('#show_older_versions').click(function(e) {
     $('#older_versions').show();
     $('#show_older_versions').hide();
