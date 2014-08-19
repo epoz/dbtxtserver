@@ -29,7 +29,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -38,6 +37,7 @@ INSTALLED_APPS = (
     'main',
     'gunicorn',
     'south',
+    'django.contrib.admin', # We want it to come last so we can override the templates
 )
 
 MIDDLEWARE_CLASSES = (
