@@ -1,0 +1,28 @@
+{% load utilz %}
+
+{% if object.obj.IM %}
+<div class="imageviewer">
+    images
+</div>
+
+<div id="openseadragon1" style="width: 600px; height: 500px;"></div>
+
+<script type="text/javascript" charset="utf-8">
+    var viewer = OpenSeadragon({
+        id: "openseadragon1",
+        maxZoomPixelRatio: 100,
+        {% if obj.IM|length > 1 or obj.URL_FACSIMILE|length > 0 %}
+        showReferenceStrip:  true,
+        {% endif %}
+        prefixUrl: '/static/openseadragon/images/',
+        tileSources: [
+{% for i in object.obj.IM %}
+        {
+            type: 'legacy-image-pyramid',
+            {% seadragonlevels i %}
+        }{% if not forloop.last %},{% endif %}
+{% endfor %}
+        ]
+    });
+</script>
+{% endif %}
