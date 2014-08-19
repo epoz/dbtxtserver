@@ -88,3 +88,9 @@ LOGOUT_URL = '/logout'
 LOGIN_REDIRECT_URL = '/'
 
 ES_INDEX_NAME = 'dbts'
+
+import traceback
+try:
+    from settings_local import *
+except:
+    traceback.print_exc()
