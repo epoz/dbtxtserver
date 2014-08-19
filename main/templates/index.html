@@ -4,7 +4,7 @@
     <h2>Collections</h2>
     {% for c in collections %}
         {% if c.records.all.count > 0 %}
-            <a href="/collections/{{c.id}}/">{{c.name}}</a>
+            <p><a href="/collections/{{c.id}}/">{{c.name}}</a></p>
         {% endif %}
     {% endfor %}
 

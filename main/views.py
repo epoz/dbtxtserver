@@ -29,9 +29,8 @@ def upload(request):
     if request.method == 'POST' and 'dbtxtfile' in request.FILES:
         collection = models.Collection.objects.get(id=request.POST.get('collection'))
         dbtxtfile = textbase.TextBase(request.FILES['dbtxtfile'])
-        for d in dbtxtfile:
-            models.Record.objects.create(collection=collection, uid=uuid.uuid4().hex,
-                                         user=request.user, data=textbase.dumpdict(d))
+        models.Record.objects.bulk_create([models.Record(collection=collection, uid=uuid.uuid4().hex,
+                  user=request.user, data=textbase.dumpdict(d)) for d in dbtxtfile])
         context['size'] = len(dbtxtfile)
         collection.index()
 
@@ -58,7 +57,7 @@ def search(request):
     return render(request, 'index.html', {'q':q})
 
 class RecordListView(ListView):
-    paginate_by = 50
+    paginate_by = 99
     model = models.Record
 
     def get_context_data(self, **kwargs):

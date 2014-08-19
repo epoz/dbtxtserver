@@ -7,7 +7,7 @@
 {% include "paginator.html" %}
 <ul>
 {% for record in object_list %}
-    <li><a href="/records/{{record.pk}}/">{{record.obj.SI.0}} &middot; {{record.obj.TI.0}}</a></li>
+    <li class="recordheading"><a href="/records/{{record.pk}}/">{{record.obj.SI.0}} &middot; {{record.obj.TI.0}}</a></li>
 {% empty %}
     <li>No records yet.</li>
 {% endfor %}

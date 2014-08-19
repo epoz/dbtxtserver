@@ -30,7 +30,7 @@ class Collection(models.Model):
     def search_queryset(self, q):
         es = elasticsearch.Elasticsearch()
         results = es.search(index=settings.ES_INDEX_NAME + '_' + slugify(self.name),
-                            q=q, size=999, default_operator='AND')
+                            q=q, size=9999, default_operator='AND')
 
         ids = [x['_id'] for x in results['hits']['hits']]
         return self.records.filter(pk__in=ids)

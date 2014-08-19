@@ -32,6 +32,7 @@ class Command(BaseCommand):
                 logging.exception('File %s does not exist', f)
                 continue
             
-            dbtxtfile = textbase.TextBase(f)
+            dbtxtfile = textbase.parse(f)
+            logging.info('items %s' % len(dbtxtfile))
             models.Record.objects.bulk_create([models.Record(collection=collection, uid=uuid.uuid4().hex,
                               user=user, data=textbase.dumpdict(d)) for d in dbtxtfile])

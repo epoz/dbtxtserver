@@ -1,5 +1,5 @@
 body {margin: 0; padding: 0; font-family: 'Roboto', sans-serif;}
-h1,h2,h3,h4,h5 {margin: 0;}
+h1,h2,h3,h4,h5,p {margin: 0;}
 #toolbar {height: 25px; background-color: black; padding: 15px;}
 .nav { color: #ccc; text-decoration: underline; font-size: 120%;  padding: 3px 5px;}
 .btn { color: #ccc; text-decoration: none; font-size: 120%; background-color: #555; padding: 3px 5px;}
@@ -7,3 +7,6 @@ h1,h2,h3,h4,h5 {margin: 0;}
 .pull-right {float:right;}
 
 .rightfloaterbox {float:right; border: 2px solid #ccc; padding: 5px}
+.recordheading {list-style-type:none;}
+td.fieldheading {vertical-align: top; border-top: 1px solid #aaa;}
+td {border-top: 1px solid #ddd;}
