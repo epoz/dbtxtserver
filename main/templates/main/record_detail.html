@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utilz %}
 
 {% block extra_toolbar %}{% if not user.is_anonymous %}<a style="margin-left: 20px" href="edit" class="btn btn-primary">Edit</a>{% endif %}
 {% endblock extra_toolbar %}
@@ -25,13 +26,11 @@
     </div>
     {% endif %}
 
-{% include "custom/record_detail.html" %}
-
 <table id="maintable">
 {% for k,v in object.obj.items %}
 <tr class="fieldrow">
-    <td class="fieldheading">{{k}}</td>
-    <td>{% for vv in v %}{{vv}}<br>{% endfor %} </td>
+    <td class="fieldheading">{{k}}</td>   
+    <td>{% for vv in v %}{{vv|format_by_type:k}}{% endfor %}</td>
 </tr>
 {% endfor %}
 </table>
