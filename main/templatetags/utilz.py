@@ -1,6 +1,6 @@
 from django import template
 from django.conf import settings
-from django.utils.safestring import SafeString
+from django.utils.safestring import SafeText
 from PIL import Image
 import json, os
 
@@ -24,10 +24,10 @@ def seadragonlevels(image):
 @register.filter
 def format_by_type(value, field):
     if field in ('IM', 'IM0', 'IM1', 'IM2'):
-        return SafeString('<a href="http://byvanck.arkyves.org/imgs/%s"><img src="http://h.arkyves.org/t/%s"></a>' % (value, value))
+        return SafeText(u'<a href="http://byvanck.arkyves.org/imgs/%s"><img src="http://h.arkyves.org/t/%s"></a>' % (value, value))
     if field == 'TI':
-        return SafeString('<h1>%s</h1>' % value)
+        return SafeText(u'<h1>%s</h1>' % value)
     if field == 'SI':
-        return SafeString('<h2>%s</h2>' % value)
+        return SafeText(u'<h2>%s</h2>' % value)
 
-    return SafeString(value.encode('utf8')+'<br>')
+    return SafeText(value+u'<br>')
