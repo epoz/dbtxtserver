@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+    
+    {% if user.is_anonymous %}
+    <h2>You need to <a href="/login">log in</a> to view collections</h2>
+    {% else %}
     <h2>Collections</h2>
     {% for c in collections %}
         {% if c.records.all.count > 0 %}
             <p><a href="/collections/{{c.id}}/">{{c.name}}</a></p>
         {% endif %}
     {% endfor %}
+    {% endif %}
 
 {% endblock content %}
