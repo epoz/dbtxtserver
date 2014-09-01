@@ -76,7 +76,7 @@ class RecordListView(ListView):
 class RecordEditsListView(RecordListView):
     def get_queryset(self):
         qs = super(RecordEditsListView, self).get_queryset()
-        return qs.exclude(newer=None).order_by('-timestamp')
+        return qs.filter(older__gt=0).order_by('-timestamp')
 
 class CollectionListView(ListView):
     model = models.Collection
