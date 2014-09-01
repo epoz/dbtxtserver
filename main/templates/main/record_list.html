@@ -8,7 +8,7 @@
 {% include "paginator.html" %}
 <ul>
 {% for record in object_list %}
-    <li class="recordheading"><a href="/records/{{record.pk}}/">{{record.obj.SI.0}} &middot; {{record.obj.TI.0}}</a> {% if record.older.count > 0 %}<em>{{record.user.get_full_name}} &middot;  {{record.timestamp}}</em>{% endif %}</li>
+    <li class="recordheading"><a href="/records/{{record.pk}}/">{{record.obj.SI.0}} &middot; {{record.obj.TI.0}} {{record.obj.VO.0}}</a> {% if record.older.count > 0 %}<em>{{record.user.get_full_name}} &middot;  {{record.timestamp}}</em>{% endif %}</li>
 {% empty %}
     <li>No records yet.</li>
 {% endfor %}
