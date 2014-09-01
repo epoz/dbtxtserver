@@ -9,18 +9,19 @@
 {% endblock extra_head %}
 
 {% block content %}
-    
+    <h1><a href="/collections/{{collection.pk}}/">{{collection.name}}</a></h1>
+
     {% if object.newer %}
     <div class="rightfloaterbox">
     <h3>Newer version</h3>
-    <a title="Newer version" href="{% url "record-detail" object.newer.pk %}">{{object.newer.timestamp}}</a></div>
+    <a title="by: {{object.newer.user.get_full_name}}" href="{% url "record-detail" object.newer.pk %}">{{object.newer.timestamp}}</a></div>
     {% endif %}
 
     {% if object.ancestors %}
     <div id="older_versions" class="rightfloaterbox">
     <h3>Older versions</h3>
     {% for older in object.ancestors %}
-        <a title="Older version" href="{% url 'record-detail' older.pk %}">{{older.timestamp}}</a>
+        <a title="by: {{older.user.get_full_name}}" href="{% url 'record-detail' older.pk %}">{{older.timestamp}}</a>
         {% if not forloop.last %} &middot;&middot; {% endif %}
     {% endfor %}
     </div>
