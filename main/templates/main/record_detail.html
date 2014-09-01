@@ -29,7 +29,7 @@
 <table id="maintable">
 {% for k,v in object.obj.items %}
 <tr class="fieldrow">
-    <td class="fieldheading">{{k}}</td>   
+    <td class="fieldheading">{% if k == 'VN' %}<a href="/collections/{{object.collection.pk}}/?q={{k}}:{{v.0}}">{{k}}</a>{% else %}{{k}}{% endif %}</td>
     <td>{% for vv in v %}{{vv|format_by_type:k}}{% endfor %}</td>
 </tr>
 {% endfor %}
