@@ -24,7 +24,7 @@ def seadragonlevels(image):
 @register.filter
 def format_by_type(value, field):
     if field in ('IM', 'IM0', 'IM1', 'IM2'):
-        return SafeText(u'<a href="http://byvanck.arkyves.org/imgs/%s"><img src="http://h.arkyves.org/t/%s"></a>' % (value, value))
+        return SafeText(u'<a href="http://byvanck.arkyves.org/imgs/%s"><img src="http://h1.arkyves.org/t/%s"></a>' % (value, value))
     if field == 'TI':
         return SafeText(u'<h1>%s</h1>' % value)
     if field == 'SI':
